@@ -402,7 +402,9 @@ public class Game
     private void constructBoard() 
     {
         try{
-            BufferedReader reader = new BufferedReader(new FileReader(levels.get(level))); 
+        	String filename = levels.get(level);
+        	FileReader fileReader = new FileReader(new File(filename));
+            BufferedReader reader = new BufferedReader(fileReader); 
 
             String line = reader.readLine();
             boardWidth = line.split(" ").length;

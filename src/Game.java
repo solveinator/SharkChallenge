@@ -402,8 +402,10 @@ public class Game
     private void constructBoard() 
     {
         try{
-        	String filename = levels.get(level);
-        	FileReader fileReader = new FileReader(new File(filename));
+        	//String filename = levels.get(level);
+        	String filename2 = "levels" + File.separator + "level" + level + ".txt";
+        	File filefile = new File(filename2);
+        	FileReader fileReader = new FileReader(filefile);
             BufferedReader reader = new BufferedReader(fileReader); 
 
             String line = reader.readLine();
@@ -519,15 +521,15 @@ public class Game
      */
     private void loadLevels()
     {
-        levels = new ArrayList<String>();
-        levels.add("levels/level0.txt");
-        levels.add("levels/level1.txt");
-        levels.add("levels/level2.txt");
-        levels.add("levels/level3.txt");
-        levels.add("levels/level4.txt");
-        levels.add("levels/level5.txt");
-        levels.add("levels/level6.txt");
-        levels.add("levels/level7.txt");
-        levels.add("levels/last_level.txt");
+//        levels = new ArrayList<String>();
+//        levels.add("level0.txt");
+//        levels.add("level1.txt");
+//        levels.add("level2.txt");
+//        levels.add("levels.level3.txt");
+//        levels.add("levels/level4.txt");
+//        levels.add("levels/level5.txt");
+//        levels.add("levels/level6.txt");
+//        levels.add("levels/level7.txt");
+//        levels.add("levels/last_level.txt");
     }
 }

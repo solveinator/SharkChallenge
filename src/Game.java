@@ -22,10 +22,12 @@ import javax.swing.event.*;
 public class Game
 {
     //Board specifics
-    private ArrayList<String> levels; 
+    //private ArrayList<String> levels; 
+    private int numOfLevels;
     private int level; 
     private ArrayList<String> permanentBoard;
     private ArrayList<Block> board;
+    public static String blockPathPrefix;
     private int startPosition;
     private int boardHeight;
     private int boardWidth;
@@ -48,9 +50,10 @@ public class Game
      */
     public Game()
     {
-        loadLevels();
         level = 1;
+        numOfLevels = 8;
         timer = new Timer(1000, null);
+        Block.loadImages();
         Block.setGame(this);
         sharkThreat = "medium";
         sharks = new ArrayList<SharkBlock>();
@@ -78,7 +81,7 @@ public class Game
      */
     public void setLevel(int newLevelNum) throws InvalidLevelException  
     {
-        if(newLevelNum < 0 || newLevelNum > levels.size() - 1)
+        if(newLevelNum < 0 || newLevelNum > numOfLevels - 1)
         {
             throw new InvalidLevelException(newLevelNum);
         }
@@ -131,7 +134,7 @@ public class Game
      */
     public int getNumberOfLevels()
     {
-        return levels.size();
+        return numOfLevels;
     }
 
     /**
@@ -354,7 +357,7 @@ public class Game
         //Repaint GUI
         constructBoard();
         player.setPosition(startPosition);
-        player.setImage(Block.GIRL_ICON);        
+        player.setImage(Block.PICTURES.get("GIRL_ICON"));        
         gui.updateGrid();
         if(oldLocation != startPosition){
             board.set(oldLocation, constructBlock(permanentBoard.get(oldLocation), oldLocation));
@@ -401,10 +404,19 @@ public class Game
      */
     private void constructBoard() 
     {
+    	String directory = System.getProperty("user.dir");
+    	//System.out.println(directory);
+    	
         try{
-        	//String filename = levels.get(level);
-        	String filename2 = "levels" + File.separator + "level" + level + ".txt";
-        	File filefile = new File(filename2);
+        	//Make sure the program looks in the correct place for the levels. 
+        	String filename;
+        	if(!(directory.contains("SharkChallenge" + File.separator + "src"))) {
+        	filename = "src" + File.separator + "levels" + File.separator + "level" + level + ".txt";
+        	}
+        	else {
+        	filename = "levels" + File.separator + "level" + level + ".txt";
+        	}
+        	File filefile = new File(filename);
         	FileReader fileReader = new FileReader(filefile);
             BufferedReader reader = new BufferedReader(fileReader); 
 
@@ -514,22 +526,5 @@ public class Game
             newBlock = new EmptyBlock(position);
         }
         return newBlock;
-    }
-
-    /**
-     * Loads the files for each level into the levels ArrayList. Should be called before the game begins. 
-     */
-    private void loadLevels()
-    {
-//        levels = new ArrayList<String>();
-//        levels.add("level0.txt");
-//        levels.add("level1.txt");
-//        levels.add("level2.txt");
-//        levels.add("levels.level3.txt");
-//        levels.add("levels/level4.txt");
-//        levels.add("levels/level5.txt");
-//        levels.add("levels/level6.txt");
-//        levels.add("levels/level7.txt");
-//        levels.add("levels/last_level.txt");
     }
 }

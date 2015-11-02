@@ -15,6 +15,6 @@ public class SolidBlock extends BackgroundBlock
      */
     public SolidBlock(int position)
     {
-        super(false, position, Block.SOLID_ICON);
+        super(false, position, Block.PICTURES.get("SOLID_ICON"));
     }
 }

@@ -16,7 +16,7 @@ public class FinishBlock extends ActionBlock
      */
     public FinishBlock(int position)
     {
-        super(true, false, position, Block.FINISH_ICON);
+        super(true, false, position, Block.PICTURES.get("FINISH_ICON"));
     }
 
     /**

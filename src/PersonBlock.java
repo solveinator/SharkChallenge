@@ -18,7 +18,7 @@ public class PersonBlock extends MoveableBlock
      */
     public PersonBlock(int position)
     {
-        super(false, position, GIRL_ICON);
+        super(false, position, Block.PICTURES.get("GIRL_ICON"));
     }
 
     /**

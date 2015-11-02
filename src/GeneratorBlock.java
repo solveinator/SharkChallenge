@@ -22,9 +22,9 @@ public class GeneratorBlock extends ActionBlock
      */
     public GeneratorBlock(Game game, int position, String prototypeCode)
     {
-        super(false, false, position, Block.GENERATOR_ICON);
+        super(false, false, position, Block.PICTURES.get("GENERATOR_ICON"));
         this.prototypeCode = prototypeCode;
-        ImageIcon newImage = Block.GENERATOR_ICON;
+        ImageIcon newImage = Block.PICTURES.get("GENERATOR_ICON");
         if(prototypeCode.equals("K"))
         {
         newImage = new ImageIcon("images/generatorKey.png");

@@ -18,12 +18,12 @@ public class WaterBlock extends BackgroundBlock implements Deadly
      */
     public WaterBlock(int position)
     {
-        super(true, position, Block.WATER_ICON);
+        super(true, position, Block.PICTURES.get("WATER_ICON"));
     }
     
     public ImageIcon getDeathImage()
     {
-        return Block.DROWNING_ICON;
+        return Block.PICTURES.get("DROWNING_ICON");
     }
     
     public void playDeathSound()

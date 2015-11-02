@@ -16,7 +16,7 @@ public class MudBlock extends ActionBlock
  
     public MudBlock(int position)
     {
-        super (true, false, position, Block.MUD_ICON);
+        super (true, false, position, Block.PICTURES.get("MUD_ICON"));
     }
 
     /**

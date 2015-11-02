@@ -16,7 +16,7 @@ public class KeyBlock extends ActionBlock
      */
     public KeyBlock(int position)
     {
-        super(true, false, position, Block.KEY_ICON);
+        super(true, false, position, Block.PICTURES.get("KEY_ICON"));
     }
     
     /**

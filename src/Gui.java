@@ -23,7 +23,7 @@ public class Gui implements KeyListener
     private JPanel right;
     private JTextArea goal;
     private JPanel levelWrapper;
-    private JLabel level; //Note that this is different from the level field in the game class.
+    private JLabel level; //Note that this a JLabel, different from the int level field in the game class.
     private JButton pause;
     private JPanel grid;
     private JPanel threatWrapper;
@@ -150,7 +150,7 @@ public class Gui implements KeyListener
         for(int i = 0; i < 6; i++)
         {
             JLabel spot = new JLabel();
-            spot.setIcon(Block.EMPTY_ICON);
+            spot.setIcon(Block.PICTURES.get("EMPTY_ICON"));
             backpackItems.add(spot);
         }
         backpack.add(backpackItems);

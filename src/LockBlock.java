@@ -20,7 +20,7 @@ public class LockBlock extends ActionBlock
      */
     public LockBlock(int position)
     {
-        super(false, false, position, Block.LOCK_ICON);
+        super(false, false, position, Block.PICTURES.get("LOCK_ICON"));
     }
 
     /**

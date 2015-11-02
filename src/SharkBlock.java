@@ -26,12 +26,12 @@ public class SharkBlock extends WaterBlock implements ActionListener, Deadly
     public SharkBlock(int position)
     {
         super(position);
-        setImage(Block.SHARK_ICON);   
+        setImage(Block.PICTURES.get("SHARK_ICON"));   
         game = getGame();
         game.getTimer().addActionListener(this);
         game.addShark(this);
         randNum = new Random();
-        deathImage = Block.BLOODY_WATER_ICON; 
+        deathImage = Block.PICTURES.get("BLOODY_WATER_ICON"); 
     }
 
     /**
@@ -101,7 +101,7 @@ public class SharkBlock extends WaterBlock implements ActionListener, Deadly
         }
 
         if(newPosition == eatingPosition){
-            deathImage = DEATH_BY_SHARK_ICON;
+            deathImage = Block.PICTURES.get("DEATH_BY_SHARK_ICON");
             game.setDead(true);
         }
 

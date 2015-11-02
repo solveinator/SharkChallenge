@@ -12,17 +12,18 @@ import javax.sound.sampled.*;
  */
 public class Sound
 {
-    private static HashMap<String, File> sounds;
+    private static HashMap<String, File> SOUNDS;
     private File currentFile;
+    private String prefix;
 
     /**
      * Constructor for objects of class Sound
      */
     public Sound()
     {
-        sounds = new HashMap<String, File>();
+        SOUNDS = new HashMap<String, File>();
         loadSounds();
-        currentFile = new File("sounds/Water_Balloon-SoundBible.com-1358039219.wav");
+        currentFile = new File(prefix + "sounds/Water_Balloon-SoundBible.com-1358039219.wav");
                     
         
     }
@@ -32,13 +33,20 @@ public class Sound
      */
     public void loadSounds()
     {
-        sounds.put("splash",new File("sounds/Water_Balloon-SoundBible.com-1358039219.wav"));
-        sounds.put("scrape", new File("sounds/neck_snap-Vladimir-719669812.wav"));
-        sounds.put("tada", new File("sounds/Ta_Da-SoundBible.com-1884170640.wav"));
-        sounds.put("click", new File("sounds/switch-SoundBible.com-350629905.wav"));
-        sounds.put("ting", new File("sounds/Shells_falls-Marcel-829263474.wav"));
-        sounds.put("lockClick", new File("sounds/Metal_Reflect-SoundBible.com-977435034.wav"));
-        sounds.put("bite", new File("sounds/Dog_Bite-SoundBible.com-107030898.wav"));
+    	String directory = System.getProperty("user.dir");
+    	if(!(directory.contains("SharkChallenge" + File.separator + "src"))) {
+    	prefix = "src" + File.separator + "sounds" + File.separator;
+    	}
+    	else {
+    	prefix = "sounds" + File.separator;
+    	}
+        SOUNDS.put("splash",new File(prefix + "Water_Balloon-SoundBible.com-1358039219.wav"));
+        SOUNDS.put("scrape", new File(prefix + "neck_snap-Vladimir-719669812.wav"));
+        SOUNDS.put("tada", new File(prefix + "Ta_Da-SoundBible.com-1884170640.wav"));
+        SOUNDS.put("click", new File(prefix + "switch-SoundBible.com-350629905.wav"));
+        SOUNDS.put("ting", new File(prefix + "Shells_falls-Marcel-829263474.wav"));
+        SOUNDS.put("lockClick", new File(prefix + "Metal_Reflect-SoundBible.com-977435034.wav"));
+        SOUNDS.put("bite", new File(prefix + "Dog_Bite-SoundBible.com-107030898.wav"));
     }
 
     /**
@@ -50,7 +58,7 @@ public class Sound
     {
         try{
             Clip clip = AudioSystem.getClip();
-            AudioInputStream ais = AudioSystem.getAudioInputStream(sounds.get(name));
+            AudioInputStream ais = AudioSystem.getAudioInputStream(SOUNDS.get(name));
             clip.open(ais);
             clip.loop(0);
         }

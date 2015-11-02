@@ -1,3 +1,6 @@
+import java.io.File;
+import java.util.HashMap;
+
 import javax.swing.*;
 
 
@@ -15,22 +18,25 @@ public abstract class Block
     private ImageIcon icon;
     private int position;
     
-    private static Game game;
+    private static String PREFIX = "";
+    private static Game GAME;
     
-    public static final ImageIcon SOLID_ICON = new ImageIcon("images/solid.png");
-    public static final ImageIcon EMPTY_ICON = new ImageIcon("images/blank.jpg");
-    public static final ImageIcon WATER_ICON = new ImageIcon("images/water.png");
-    public static final ImageIcon GENERATOR_ICON = new ImageIcon("images/generator.png");
-    public static final ImageIcon MOVEABLE_ICON = new ImageIcon("images/moveable.png");
-    public static final ImageIcon LOCK_ICON = new ImageIcon("images/lock.png");
-    public static final ImageIcon FINISH_ICON = new ImageIcon("images/finish2.jpg");
-    public static final ImageIcon KEY_ICON = new ImageIcon("images/key.png");
-    public static final ImageIcon MUD_ICON = new ImageIcon("images/mud.png");
-    public static final ImageIcon GIRL_ICON = new ImageIcon("images/person.jpg");
-    public static final ImageIcon DROWNING_ICON = new ImageIcon("images/splash.png");
-    public static final ImageIcon BLOODY_WATER_ICON = new ImageIcon("images/bloodyWater.png");
-    public static final ImageIcon DEATH_BY_SHARK_ICON = new ImageIcon("images/deathByShark.png");
-    public static final ImageIcon SHARK_ICON = new ImageIcon("images/shark.png");
+    public static HashMap<String, ImageIcon> PICTURES = new HashMap<String, ImageIcon>();
+    
+//    public static ImageIcon SOLID_ICON = new ImageIcon(prefix + "images/solid.png");
+//    public static ImageIcon EMPTY_ICON = new ImageIcon(prefix + "images/blank.jpg");
+//    public static ImageIcon WATER_ICON = new ImageIcon(prefix + "images/water.png");
+//    public static ImageIcon GENERATOR_ICON = new ImageIcon(prefix + "images/generator.png");
+//    public static ImageIcon MOVEABLE_ICON = new ImageIcon(prefix + "images/moveable.png");
+//    public static ImageIcon LOCK_ICON = new ImageIcon(prefix + "images/lock.png");
+//    public static ImageIcon FINISH_ICON = new ImageIcon(prefix + "images/finish2.jpg");
+//    public static ImageIcon KEY_ICON = new ImageIcon(prefix + "images/key.png");
+//    public static ImageIcon MUD_ICON = new ImageIcon(prefix + "images/mud.png");
+//    public static ImageIcon GIRL_ICON = new ImageIcon(prefix + "images/person.jpg");
+//    public static ImageIcon DROWNING_ICON = new ImageIcon(prefix + "images/splash.png");
+//    public static ImageIcon BLOODY_WATER_ICON = new ImageIcon(prefix + "images/bloodyWater.png");
+//    public static ImageIcon DEATH_BY_SHARK_ICON = new ImageIcon(prefix + "images/deathByShark.png");
+//    public static ImageIcon SHARK_ICON = new ImageIcon(prefix + "images/shark.png");
     
     /**
      * Constructor for an abstract block. 
@@ -121,9 +127,34 @@ public abstract class Block
      * 
      * @return Game The game. 
      */
+    public static void loadImages()
+    {
+    	String directory = System.getProperty("user.dir");
+    	if(!(directory.contains("SharkChallenge" + File.separator + "src"))) {
+        	PREFIX = "src" + File.separator + "images" + File.separator;
+        	}
+        else {
+        	PREFIX = "images" + File.separator;
+        	}
+    	PICTURES.put("SOLID_ICON", new ImageIcon(PREFIX + "solid.png"));
+    	PICTURES.put("EMPTY_ICON", new ImageIcon(PREFIX + "blank.jpg"));
+    	PICTURES.put("WATER_ICON", new ImageIcon(PREFIX + "water.png"));
+    	PICTURES.put("GENERATOR_ICON", new ImageIcon(PREFIX + "generator.png"));
+    	PICTURES.put("MOVEABLE_ICON", new ImageIcon(PREFIX + "moveable.png"));
+    	PICTURES.put("LOCK_ICON", new ImageIcon(PREFIX + "lock.png"));
+    	PICTURES.put("FINISH_ICON", new ImageIcon(PREFIX + "finish2.jpg"));
+    	PICTURES.put("KEY_ICON", new ImageIcon(PREFIX + "key.png"));
+    	PICTURES.put("MUD_ICON", new ImageIcon(PREFIX + "mud.png"));
+    	PICTURES.put("GIRL_ICON", new ImageIcon(PREFIX + "person.jpg"));
+    	PICTURES.put("DROWNING_ICON", new ImageIcon(PREFIX + "splash.png"));
+    	PICTURES.put("BLOODY_WATER_ICON", new ImageIcon(PREFIX + "bloodyWater.png"));
+    	PICTURES.put("DEATH_BY_SHARK_ICON", new ImageIcon(PREFIX + "deathByShark.png"));
+    	PICTURES.put("SHARK_ICON", new ImageIcon(PREFIX + "shark.png"));
+    	
+    }
     public static void setGame(Game theGame)
     {
-        game = theGame;
+        GAME = theGame;
     }
     
      /**
@@ -133,7 +164,7 @@ public abstract class Block
      */
     public static Game getGame()
     {
-        return game;
+        return GAME;
     }
     
      /**
@@ -147,10 +178,10 @@ public abstract class Block
     public int getTargetLocation(int target, String direction)
     {
         if(direction == "up") {
-            target = target - game.getBoardWidth(); 
+            target = target - GAME.getBoardWidth(); 
         }
         else if(direction == "down") {
-            target = target + game.getBoardWidth();
+            target = target + GAME.getBoardWidth();
         }
         else if(direction == "left") {
             target = target - 1;
@@ -190,6 +221,6 @@ public abstract class Block
      */
     public void updateGuiBlock()
     {
-        game.getGui().updateBlock(position);
+        GAME.getGui().updateBlock(position);
     }
 }

@@ -16,6 +16,6 @@ public class EmptyBlock extends BackgroundBlock
      */
     public EmptyBlock(int position)
     {
-        super(true, position, Block.EMPTY_ICON);
+        super(true, position, Block.PICTURES.get("EMPTY_ICON"));
     }
 }

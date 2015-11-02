@@ -19,7 +19,7 @@ public class PushableBlock extends MoveableBlock
      */
     public PushableBlock(int position)
     {
-        super(true, position, Block.MOVEABLE_ICON);
+        super(true, position, Block.PICTURES.get("MOVEABLE_ICON"));
     }
 
     /**

@@ -28,7 +28,6 @@ public class Gui implements KeyListener
     private JPanel grid;
     private JPanel threatWrapper;
     private JLabel threat;
-    private JPanel buttons;
     private JPanel backpack;
     private JPanel backpackItems;
 

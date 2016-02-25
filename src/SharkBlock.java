@@ -12,11 +12,10 @@ import java.lang.Integer;
  * @author Solveig Osborne 
  * @version CS162 Final 06/3/2015
  */
-public class SharkBlock extends WaterBlock implements ActionListener, Deadly
+public class SharkBlock extends WaterBlock implements ActionListener
 {
     private Random randNum;
     private Game game;
-    private ImageIcon deathImage;
 
     /**
      * Constructor for objects of class SharkBlock
@@ -31,7 +30,7 @@ public class SharkBlock extends WaterBlock implements ActionListener, Deadly
         game.getTimer().addActionListener(this);
         game.addShark(this);
         randNum = new Random();
-        deathImage = Block.PICTURES.get("BLOODY_WATER_ICON"); 
+        this.setDeathImage(Block.PICTURES.get("BLOODY_WATER_ICON")); 
     }
 
     /**
@@ -101,7 +100,7 @@ public class SharkBlock extends WaterBlock implements ActionListener, Deadly
         }
 
         if(newPosition == eatingPosition){
-            deathImage = Block.PICTURES.get("DEATH_BY_SHARK_ICON");
+            setDeathImage(Block.PICTURES.get("DEATH_BY_SHARK_ICON"));
             game.setDead(true);
         }
 
@@ -158,14 +157,6 @@ public class SharkBlock extends WaterBlock implements ActionListener, Deadly
         {
         moveRandomly();
         }
-    }
-
-    /**
-     * Stops the timer and replaces the normal picture with a death picture if the player dies. 
-     */
-    public ImageIcon getDeathImage()
-    {
-        return deathImage; 
     }
 
     public void playDeathSound()

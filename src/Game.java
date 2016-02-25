@@ -50,12 +50,12 @@ public class Game
      */
     public Game()
     {
-        level = 1;
+        level = 1; //Set default level
         numOfLevels = 8;
         timer = new Timer(1000, null);
-        Block.loadImages();
+        Block.loadImages(); //Initialize all block images
         Block.setGame(this);
-        sharkThreat = "medium";
+        sharkThreat = "medium"; //Set default shark threat level
         sharks = new ArrayList<SharkBlock>();
         constructBoard();
         dead = false;
@@ -378,12 +378,15 @@ public class Game
     {
         //Stop sharks
         timer.stop();
-        Deadly deadlyBlock = (Deadly) deathBlock;
-        ImageIcon deathImage =  deadlyBlock.getDeathImage();
+        ImageIcon deathImage =  deathBlock.getDeathImage();
         player.setImage(deathImage);
         player.updateGuiBlock();
         //Call death sound.
-        deadlyBlock.playDeathSound();
+        deathBlock.playDeathSound();
+        //String[] sounds = deathBlock.getDeathSounds();
+        //for(int i = 0; i < sounds.length; i++) {
+        //	sound.playSound(sounds[i]);
+        //}
         //Prompt gui to ask if player wants to start again. 
         gui.resetPopUp("Game Over.","You have died.\nWould you like to play again.", "dead");
     }

@@ -45,7 +45,7 @@ public class PersonBlock extends MoveableBlock
         game.setBlock(oldPosition, replacementBlock);
         replacementBlock.updateGuiBlock();
         
-        if(targetBlock instanceof Deadly)
+        if(targetBlock.getDeadly())
         {
             //Deadly targetBlockk = (Deadly) targetBlock;
             //targetBlockk.setDeadImage();

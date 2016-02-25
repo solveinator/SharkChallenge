@@ -9,7 +9,7 @@ import javax.swing.*;
  * @author Solveig Osborne 
  * @version CS162 Final 05/22/2015
  */
-public class WaterBlock extends BackgroundBlock implements Deadly
+public class WaterBlock extends BackgroundBlock
 {
     /**
      * Constructor for objects of class EmptyBlock
@@ -19,11 +19,8 @@ public class WaterBlock extends BackgroundBlock implements Deadly
     public WaterBlock(int position)
     {
         super(true, position, Block.PICTURES.get("WATER_ICON"));
-    }
-    
-    public ImageIcon getDeathImage()
-    {
-        return Block.PICTURES.get("DROWNING_ICON");
+        //Set the death image (which makes the tile deadly)
+        this.setDeathImage(Block.PICTURES.get("DROWNING_ICON"));
     }
     
     public void playDeathSound()

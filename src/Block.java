@@ -12,10 +12,10 @@ import javax.swing.*;
  */
 public abstract class Block
 {   
-    private boolean deadly;
     private boolean walkable;
     private boolean pushable;
     private ImageIcon icon;
+    private ImageIcon deathImage;
     private int position;
     
     private static String PREFIX = "";
@@ -82,13 +82,30 @@ public abstract class Block
     }
     
     /**
-     * Sets the for a specific block. 
+     * Sets the death image for a specific block. 
      * 
-     * @param ImageIcon The new image for that block.
+     * @param ImageIcon The new death image for that block.
      */
     public void setImage(ImageIcon image)
     {
         icon = image;
+    }
+    
+    public ImageIcon getDeathImage()
+    {
+        return deathImage;
+    }
+    
+    /**
+     * Sets the death image for a specific block. A block can only be deadly if
+     * it has a deathImage assigned to it. 
+     * If the deathImage is null, the block is not deadly. 
+     * 
+     * @param ImageIcon The new death image for that block.
+     */
+    public void setDeathImage(ImageIcon image)
+    {
+        deathImage = image;
     }
     
     /**
@@ -120,6 +137,18 @@ public abstract class Block
     protected void setPosition(int newPosition)
     {
         position = newPosition;
+    }
+    
+    /**
+     * Gets whether the block is deadly or not. A block is deadly iff it has a death image assigned to it. 
+     * 
+     * @return boolean Whether the block will kill you. 
+     */
+    protected boolean getDeadly(){
+    	return !(deathImage == null); 
+    }
+    
+    protected void playDeathSound(){
     }
     
     /**

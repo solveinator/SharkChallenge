@@ -1,4 +1,6 @@
+package blocks;
 import javax.swing.*;
+
 import java.util.ArrayList;
 
 /**
@@ -17,9 +19,9 @@ public abstract class MoveableBlock extends Block
      * @param int The integer position of the block.
      * @param ImageIcon The image associated with this type of block.
      */
-    public MoveableBlock(boolean canWalkOn, int position, ImageIcon image)
+    public MoveableBlock(int position, ImageIcon image)
     {
-        super(canWalkOn, true, position, image);
+        super(true, position, image);
     }
 
     /**
@@ -72,7 +74,7 @@ public abstract class MoveableBlock extends Block
 
         //If the new square containts a moveable block, you can only move there if that block 
         //has somewhere to move to...
-        if(block instanceof PersonBlock && targetBlock instanceof MoveableBlock)
+        if(block instanceof PersonBlock_P && targetBlock instanceof MoveableBlock)
         {
             return moveableCanMove(targetBlock, direction);
         }

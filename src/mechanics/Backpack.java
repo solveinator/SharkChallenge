@@ -1,4 +1,8 @@
+package mechanics;
 import java.util.ArrayList;
+
+import blocks.Block;
+import blocks.EmptyBlock_E;
 
 /**
  * The Backpack class contains all items and methods relating to the player's backpack. All items in the backpack
@@ -22,7 +26,7 @@ public class Backpack
         itemList = new Block[6];
         for(int i = 0; i < itemList.length ; i++)
         {
-        itemList[i] = new EmptyBlock(-1);
+        itemList[i] = new EmptyBlock_E(-1);
         }
     }
 
@@ -55,7 +59,7 @@ public class Backpack
     {
         for(int i = 0; i < itemList.length; i++)
         {
-            if(itemList[i] instanceof EmptyBlock)
+            if(itemList[i] instanceof EmptyBlock_E)
             {
                 itemList[i] = block;
                 gui.updateBackpackImage(i, block);
@@ -76,7 +80,7 @@ public class Backpack
         {   
             if(itemList[i].getClass().equals(block.getClass()))
             {
-                EmptyBlock replacement = new EmptyBlock(-1);
+                EmptyBlock_E replacement = new EmptyBlock_E(-1);
                 itemList[i] = replacement;
                 gui.updateBackpackImage(i, replacement);
                 return true;
@@ -92,7 +96,7 @@ public class Backpack
     {
         for(int i = 0; i < itemList.length; i++)
         {
-            Block replacement = new EmptyBlock(-1);
+            Block replacement = new EmptyBlock_E(-1);
             itemList[i] = replacement;
             gui.updateBackpackImage(i, replacement);
         }

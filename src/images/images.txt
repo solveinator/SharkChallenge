@@ -1,0 +1,14 @@
+SOLID_ICON|solid.png
+EMPTY_ICON|blank.jpg
+WATER_ICON|water.png
+GENERATOR_ICON|generator.png
+MOVEABLE_ICON|moveable.png
+LOCK_ICON|lock.png
+FINISH_ICON|finish2.jpg
+KEY_ICON|key.png
+MUD_ICON|mud.png
+GIRL_ICON|person.jpg
+DROWNING_ICON|splash.png
+BLOODY_WATER_ICON|bloodyWater.png
+DEATH_BY_SHARK_ICON|deathByShark.png
+SHARK_ICON|shark.png

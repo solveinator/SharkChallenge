@@ -1,15 +1,23 @@
+package blocks;
 import javax.swing.*;
+
+import mechanics.Game;
+import mechanics.Sound;
+
 import java.util.HashMap;
+import java.util.*;
 
 /**
  * A GeneratorBlock produces PushableBlocks when touched.
  * 
+ * @param <E> the type of the value being generate
  * @author Solveig Osborne 
  * @version CS162 Final 05/30/2015
  */
-public class GeneratorBlock extends ActionBlock
+public class GeneratorBlock_G extends ActionBlock
 {
-    private String prototypeCode;
+	private static boolean walkable = false;	
+    private Block prototypeBlock;
     //private HashMap<String, String> imageAddresses = new HashMap <String, ImageIcon>();
     
     //imageAddresses.put("Default", "images/generator.png");
@@ -20,18 +28,23 @@ public class GeneratorBlock extends ActionBlock
      * 
      * @param int The integer position of the block.  
      */
-    public GeneratorBlock(Game game, int position, String prototypeCode)
+    public GeneratorBlock_G(int position, Block prototypeBlock)
     {
-        super(false, false, position, Block.PICTURES.get("GENERATOR_ICON"));
-        this.prototypeCode = prototypeCode;
+        super(false, position, Block.PICTURES.get("GENERATOR_ICON"));
+        this.prototypeBlock = prototypeBlock;
         ImageIcon newImage = Block.PICTURES.get("GENERATOR_ICON");
-        if(prototypeCode.equals("K"))
+        if(prototypeBlock instanceof KeyBlock_K)
         {
         newImage = new ImageIcon("images/generatorKey.png");
         }       
         setImage(newImage);
     }
 
+    public GeneratorBlock_G()
+    {
+        super(false, -1, Block.PICTURES.get("GENERATOR_ICON"));
+        ImageIcon newImage = Block.PICTURES.get("GENERATOR_ICON");
+    }
     /**
      * Makes the block perform its action.
      * 
@@ -48,13 +61,20 @@ public class GeneratorBlock extends ActionBlock
         {
             //Block newBlock = new PushableBlock(newPosition);
             //getGame().setBlock(newPosition, newBlock);
-            game.setBlock(newPosition, game.constructBlock(prototypeCode, newPosition));
-            game.constructBlock(prototypeCode, newPosition).updateGuiBlock();
-            if(prototypeCode.equals("S"))
+            game.setBlock(newPosition, prototypeBlock.clone(newPosition));
+            prototypeBlock.clone(newPosition).updateGuiBlock();
+            if(prototypeBlock instanceof SharkBlock_S)
             {
                 game.pause();
             }
         }
     }
 
+    public boolean getWalkable() {
+    	return walkable;
+    }
+    
+    public Block clone(int position) {
+    	return new GeneratorBlock_G(position, prototypeBlock);
+    }
 }

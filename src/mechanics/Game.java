@@ -1,8 +1,24 @@
+package mechanics;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
+
+import java.util.HashMap;
+
+import blocks.Block;
+import blocks.EmptyBlock_E;
+import blocks.FinishBlock_F;
+import blocks.GeneratorBlock_G;
+import blocks.KeyBlock_K;
+import blocks.LockBlock_L;
+import blocks.MudBlock_M;
+import blocks.PersonBlock_P;
+import blocks.PushableBlock_B;
+import blocks.SharkBlock_S;
+import blocks.SolidBlock_X;
+import blocks.WaterBlock_W;
 
 /**
  * The Game class is the traffic controller of the Solveig's Challenge game. The Game class is reposible for
@@ -28,6 +44,7 @@ public class Game
     private ArrayList<String> permanentBoard;
     private ArrayList<Block> board;
     public static String blockPathPrefix;
+    private HashMap<String,Block> abvMap;
     private int startPosition;
     private int boardHeight;
     private int boardWidth;
@@ -37,10 +54,10 @@ public class Game
     private Sound sound;
 
     //Game progress
-    private PersonBlock player;
+    private PersonBlock_P player;
     private String sharkThreat;
     private Backpack backpack;
-    private ArrayList<SharkBlock> sharks;
+    private ArrayList<SharkBlock_S> sharks;
 
     private boolean dead;
     private boolean won;
@@ -56,7 +73,8 @@ public class Game
         Block.loadImages(); //Initialize all block images
         Block.setGame(this);
         sharkThreat = "medium"; //Set default shark threat level
-        sharks = new ArrayList<SharkBlock>();
+        sharks = new ArrayList<SharkBlock_S>();
+        initAbvMap();
         constructBoard();
         dead = false;
         won = false;        
@@ -180,9 +198,9 @@ public class Game
     /**
      * Adds a shark to the list of all sharks.
      * 
-     * @param SharkBlock The SharkBlock to be added.
+     * @param SharkBlock_S The SharkBlock to be added.
      */
-    public void addShark(SharkBlock shark)
+    public void addShark(SharkBlock_S shark)
     {
         sharks.add(shark);
     }
@@ -253,7 +271,7 @@ public class Game
      * 
      * @return PersonBlock The player.
      */
-    public PersonBlock getPlayer()
+    public PersonBlock_P getPlayer()
     {
         return player;
     }
@@ -283,11 +301,11 @@ public class Game
     /**
      * Makes a shark stop moving. It will still kill the player if it steps on it.
      * 
-     * @param SharkBlock The shark that will be killed.
+     * @param SharkBlock_S The shark that will be killed.
      */
     public void killShark(int position)
     {
-        for(SharkBlock shark : sharks)
+        for(SharkBlock_S shark : sharks)
             if(shark.getPosition() == position)
             {
                 timer.removeActionListener(shark);
@@ -349,7 +367,7 @@ public class Game
         {
             timer.removeActionListener(sharks.get(i));
         }
-        sharks = new ArrayList<SharkBlock>();
+        sharks = new ArrayList<SharkBlock_S>();
         //Remove old items
         won = false;
         dead = false;
@@ -439,7 +457,7 @@ public class Game
                         startPosition = i + j*boardWidth;
                         if(player == null)
                         {
-                            player = new PersonBlock(startPosition);
+                            player = new PersonBlock_P(startPosition);
                         }
                         letter = "E";
                     }
@@ -485,49 +503,54 @@ public class Game
      *      K - A key tile.
      *      M - A mud tile.
      *      S - A shark tile.
-     *      P - An emtpy tile is constructed. (The "person" tile will be displayed on top of the empty tile.)
+     *      P - An empty tile is constructed. (The "person" tile will be displayed on top of the empty tile.)
      */
     public Block constructBlock(String blockSymbol, int position)
     {
-        Block newBlock;
-        if(blockSymbol.equals("E") || blockSymbol.equals("P")) {
-            newBlock = new EmptyBlock(position);
-        }
-        else if(blockSymbol.equals("X")) {
-            newBlock = new SolidBlock(position);
-        }
-        else if(blockSymbol.equals("W")) {
-            newBlock = new WaterBlock(position);
-        }
-        else if(blockSymbol.startsWith("G")) {
+    	System.out.println(blockSymbol);
+        Block newBlock = new EmptyBlock_E(position);
+        
+        if(blockSymbol.startsWith("G")) {
             String prototypeSymbol = blockSymbol.substring(1);
-            if (prototypeSymbol.length() != 1)
-            {
-                prototypeSymbol = "B";
-            }
-            newBlock = new GeneratorBlock(this, position, prototypeSymbol);
-        }
-        else if(blockSymbol.equals("B")) {
-            newBlock = new PushableBlock(position);
-        }
-        else if(blockSymbol.equals("L")) {
-            newBlock = new LockBlock(position);
-        }
-        else if(blockSymbol.equals("F")) {
-            newBlock = new FinishBlock(position);
-        }
-        else if(blockSymbol.equals("K")) {
-            newBlock = new KeyBlock(position);
-        }
-        else if(blockSymbol.equals("M")) {
-            newBlock = new MudBlock(position);
+            newBlock = new GeneratorBlock_G(position, abvMap.get(prototypeSymbol));
         }
         else if(blockSymbol.equals("S")) {
-            newBlock = new SharkBlock(position);
+            newBlock = new SharkBlock_S(position);
         }
         else {
-            newBlock = new EmptyBlock(position);
+        	newBlock = abvMap.get(blockSymbol);
+        	newBlock = newBlock.clone(position);      	
         }
-        return newBlock;
+        //if(blockSymbol.equals("E") || blockSymbol.equals("P")) {
+        //    newBlock = new EmptyBlock_E(position);
+        //Note: need to accoutn fot the above.        
+        	return newBlock;
+    }
+    
+    private void initAbvMap() {
+    	 File[] files = new File("src/blocks/").listFiles();
+    	 abvMap = new HashMap<String,Block>();
+    	 for(int i = 0; i < files.length; i++) {
+    		 String fullName = "" + files[i].getName();
+    		 fullName = "blocks." + fullName.substring(0, fullName.length() - 5);
+    		 System.out.println("FullName: " + fullName);
+    		 String[] parsedFileName = fullName.split("_");
+    		 
+    		 try {
+    			 if(parsedFileName.length > 1) {
+    				 Object thisBlock = Class.forName(fullName).newInstance();
+    				 Block blockBlock = (Block) thisBlock;
+    				 System.out.println(blockBlock.getClass());
+    				 System.out.println("Created: " + fullName);		 
+    				 abvMap.put(parsedFileName[1].substring(0, 1), blockBlock );
+    				 System.out.println("Added: (" + parsedFileName[1].substring(0, 1) + "," + fullName + ")");
+    			 }
+    		 }
+    		 catch(IllegalAccessException e1) {System.out.println("Access problem");}
+    		 catch(InstantiationException e2) {System.out.println("Problem instanciating");}
+    		 catch(ExceptionInInitializerError e3) {System.out.println("Problem initialzing");}
+    		 catch(ClassNotFoundException e4) {System.out.println("ClassNotFound");}
+    	 }
+    	 System.out.println(abvMap.get("X"));
     }
 }

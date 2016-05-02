@@ -1,9 +1,13 @@
+package mechanics;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
-import java.util.Hashtable;
 
+import blocks.Block;
+import blocks.PersonBlock_P;
+
+import java.util.ArrayList;
 /**
  * The GUI class creates the visible interface of the game and has the necessary methods required to keep the
  * interface updated in response to changes. It implements the KeyListener interface in order
@@ -16,7 +20,8 @@ import java.util.Hashtable;
 public class Gui implements KeyListener 
 {
     private Game game;
-    private PersonBlock player;
+    private PersonBlock_P player;
+    private final int screenSize = 11; //The length blocks shown on one side. Must be an odd number.
     private JFrame frame;
     private Container contentPane;
     private JMenuBar menuBar;
@@ -34,7 +39,7 @@ public class Gui implements KeyListener
     /**
      * Constructor for objects of class Gui
      */
-    public Gui(Game game, PersonBlock player)
+    public Gui(Game game, PersonBlock_P player)
     {
         this.game = game;
         this.player = player;
@@ -254,6 +259,40 @@ public class Gui implements KeyListener
             "\n\nPlease use the arrow keys to move about the board.\n");
     }
 
+    private ArrayList<Block> getAdjBlocks(){
+    	ArrayList<Block> adjList = new ArrayList<Block>(screenSize * screenSize);
+    	//Edge cases (when close to the edges)
+    	int playerXpos = player.getPosition() % game.getBoardHeight();
+    	int playerYpos = player.getPosition() / game.getBoardHeight();
+    	
+    	int centerXpos;
+    	if(playerXpos <= screenSize/2){
+    		centerXpos = screenSize/2 + 1;
+    	}
+    	else if(playerXpos >= screenSize - screenSize/2){
+    		centerXpos = screenSize - (screenSize/2 + 1);
+    	}
+    	else {
+    		centerXpos = playerXpos;
+    	}
+    	
+    	int centerYpos;
+    	if(playerYpos <= screenSize/2){
+    		centerYpos = screenSize/2 + 1;
+    	}
+    	else if(playerYpos >= screenSize - screenSize/2){
+    		centerYpos = screenSize - (screenSize/2 + 1);
+    	}
+    	else {
+    		centerYpos = playerYpos;
+    	}
+    	for(int j = centerYpos - screenSize/2; j <= centerYpos + screenSize/2; j++) {
+    		for(int i = centerXpos - screenSize/2; i <= centerYpos + screenSize/2; i++){
+    			adjList.add(game.getBlock(j*screenSize + i));
+    		}
+    	}
+    	return adjList;
+    }
     /**
      * Creates the grid for the game board. 
      */

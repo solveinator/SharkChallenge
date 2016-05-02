@@ -1,0 +1,116 @@
+level0
+X X X X X X X X X X X
+X E E E L F L E E E X
+X E W E L L L E W E X
+X E W E E W E E W E X
+X E E W E W E W E E X
+X W E W E W E W E W X
+X W E W E S E W E W X
+X W E W E W E W E W X
+X W E W E W E W E W X
+X K E W E E E W E P X
+X X X X X X X X X X X
+
+level1
+X X X X X X X X X X X
+X F W W W W W W W P X
+X W W W W W W W B E X
+X W W S W W W B E E X
+X W W W W W B E B E X
+X W W W W B E B E E X
+X W W W B E B E B E X
+X W W B E B E B E E X
+X W B E B E B E B E X
+X B E B E B E B E E X
+X X X X X X X X X X X
+
+level2
+X X X X X X X X X X X
+X W W W X F X W W W X
+X W W W W L W W W W X
+X W W W W W W W S W X
+X K W W W W W W W S X
+X W W W E E P W W W X
+X W W W E GB E W W W X
+X W W W W E W W W W X
+X W S W W W W W W W X
+X W W W W W W W W W X
+X X X X X X X X X X X
+
+level3
+X X X X X X X X X X X
+X F W W W W W W E P X
+X W W W S W W E E E X
+X W W S W W E E E E X
+X W S W W E E E E E X
+X W W W E E E E E E X
+X W W E E E E E E E X
+X B E B E B E B E B X
+X E B E B E B E B E X
+X E E E E E E E E E X
+X X X X X X X X X X X
+
+level4
+X X X X X X X X X X X
+X W B W B W B W B P X
+X B W B W B W B W B X
+X W B W B W B W B W X
+X B W B W B W B W B X
+X W B W B S B W B W X
+X B W B W B W B W B X
+X W B W B W B W B W X
+X B W B W B W B W B X
+X W F W B W B W B W X
+X X X X X X X X X X X
+
+level5
+X X X X X X X X X X X
+X W W W X F X W W W X
+X W W W W L W W W W X
+X W W S W W W W S W X
+X K W W W W W W W W X
+X W W W W W W W W W X
+X W W W E E P W W W X
+X W W W E GB E W S W X
+X S W W W E W W W W X
+X W W W S W W E W W X
+X X X X X X X X X X X
+
+level6
+X X X X X X X X X X X
+X E W W E E B W B E X
+X E B B E B E W B E X
+X K W W E E E W E E X
+X B W W W E W W W S X
+X F W W W P S W W W X
+X B W S W W W W W F X
+X W W W E L E W S W X
+X W W E B B B E W W X
+X E E E E E E E E E X
+X X X X X X X X X X X
+
+level7
+X X X X X X X X X X X
+X L L L L L L L L L X
+X L X X X X X X X L X
+X L X L L L L L X L X
+X L X L X X X F X L X
+X L L L X L X X L L X
+X X X X X X L L L X X
+X L L L L L L X X W X
+X L X X X X X W B B X
+X L L L L L L E GK P X
+X X X X X X X X X X X
+
+level8
+X X X X X X X X X X X
+X K W W W B E E E E X
+X W W W W W B E E E X
+X W S W W W W B E E X
+X W W W W W W W B E X
+X E E B E E W W W E X
+X E E E B E W W W W X
+X E B L E B W W S W X
+X E B B E E W W W W X
+X P E E E E W W W F X
+X X X X X X X X X X X

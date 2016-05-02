@@ -1,4 +1,7 @@
+package blocks;
 import javax.swing.*;
+
+import mechanics.Game;
 
 /**
  * The PersonBlock represents the player in the game. The PersonBlock responds to user
@@ -8,19 +11,24 @@ import javax.swing.*;
  * @author Solveig Osborne 
  * @version CS162 Final 05/30/2015
  */
-public class PersonBlock extends MoveableBlock
+public class PersonBlock_P extends MoveableBlock
 {
-
+	private boolean walkable = false;
     /**
      * Constructor for objects of class PersonBlock.
      *  
      * @param int The integer position of the block.
      */
-    public PersonBlock(int position)
+    public PersonBlock_P(int position)
     {
-        super(false, position, Block.PICTURES.get("GIRL_ICON"));
+        super(position, Block.PICTURES.get("GIRL_ICON"));
     }
 
+    public PersonBlock_P()
+    {
+        super(-1, Block.PICTURES.get("GIRL_ICON"));
+    }
+    
     /**
      * Moves the block to the location specified, removes it from its previous location,
      * and updates the gui to reflect the change.
@@ -74,4 +82,12 @@ public class PersonBlock extends MoveableBlock
             targetBlock.act(direction);
         }
     }     
+    
+    public Block clone(int position){
+    	return new PersonBlock_P(position);
+    }
+    
+    public boolean getWalkable() {
+    	return walkable;
+    }
 }

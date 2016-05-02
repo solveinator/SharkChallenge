@@ -5,7 +5,7 @@ X W W S W W W W S W X
 X K W W W W W W W W X
 X W W W W W W W W W X
 X W W W E E P W W W X
-X W W W E G E W S W X
+X W W W E GB E W S W X
 X S W W W E W W W W X
 X W W W S W W E W W X
 X X X X X X X X X X X

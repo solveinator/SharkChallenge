@@ -1,3 +1,4 @@
+package blocks;
 import javax.swing.*;
 
 /**
@@ -18,9 +19,23 @@ public abstract class ActionBlock extends Block
      * @param ImageIcon The image associated with that particular tile. Image can be selected from the public 
      * images fields stored in this class. 
      */
-    public ActionBlock(boolean canWalkOn, boolean canMove, int position, ImageIcon image)
+    public ActionBlock(boolean canMove, int position, ImageIcon image)
     {
-        super(canWalkOn, canMove, position, image);
+        super(canMove, position, image);
+    }
+    
+    /**
+     * Constructor for objects of class ActionBlock
+     * 
+     * @param boolean Whether the player is able to move onto the block. (This will be true for most blocks)
+     * @param boolean Whether the block can move or not. 
+     * @param int The integer position of the  block.
+     * @param ImageIcon The image associated with that particular tile. Image can be selected from the public 
+     * images fields stored in this class. 
+     */
+    public ActionBlock()
+    {
+        super(true, -1, null);
     }
 
     /**

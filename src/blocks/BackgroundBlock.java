@@ -1,3 +1,4 @@
+package blocks;
 import javax.swing.*;
 
 /**
@@ -11,13 +12,12 @@ public abstract class BackgroundBlock extends Block
     /**
      * Constructor for objects of class BackgoundBlock
      * 
-     * @param boolean Whether the player is able to move onto the block. (This will be true for most blocks)
      * @param int The block's integer position
      * ImageIcon The block image that will be displayed.
      */
-    public BackgroundBlock(boolean canWalkOn, int position, ImageIcon image)
+    public BackgroundBlock(int position, ImageIcon image)
     {
-        super(canWalkOn, false, position, image);
+        super(false, position, image);
     }
 
     /**

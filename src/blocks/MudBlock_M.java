@@ -1,3 +1,4 @@
+package blocks;
 import javax.swing.*;
 
 /**
@@ -6,19 +7,24 @@ import javax.swing.*;
  * @author Solveig Osborne 
  * @version CS162 Final 05/13/2015
  */
-public class MudBlock extends ActionBlock
+public class MudBlock_M extends ActionBlock
 {
+	private static boolean walkable = true;
     /**
      * Constructor for objects of class MoveableBlock
      * 
      * @param int The integer position of the block. 
      */ 
  
-    public MudBlock(int position)
+    public MudBlock_M(int position)
     {
-        super (true, false, position, Block.PICTURES.get("MUD_ICON"));
+        super (false, position, Block.PICTURES.get("MUD_ICON"));
     }
 
+    public MudBlock_M()
+    {
+        super (false, -1, Block.PICTURES.get("MUD_ICON"));
+    }
     /**
      * Makes the block perform its action.
      * 
@@ -27,9 +33,17 @@ public class MudBlock extends ActionBlock
      */
     public void act(String direction)
     {
-        Block block = new EmptyBlock(getPosition());
+        Block block = new EmptyBlock_E(getPosition());
         getGame().setBlock(getPosition(), block);
         getGame().changePermanentBoard(getPosition(), "E");//Turn into land
+    }
+    
+    public Block clone(int position) {
+    	return new MudBlock_M(position);
+    }
+    
+    public boolean getWalkable() {
+    	return walkable;
     }
 }
 

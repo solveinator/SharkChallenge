@@ -1,4 +1,9 @@
+package blocks;
 import javax.swing.*;
+
+import mechanics.Game;
+import mechanics.Sound;
+
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,19 +17,31 @@ import java.lang.Integer;
  * @author Solveig Osborne 
  * @version CS162 Final 06/3/2015
  */
-public class SharkBlock extends WaterBlock implements ActionListener
+public class SharkBlock_S extends WaterBlock_W implements ActionListener
 {
     private Random randNum;
     private Game game;
-
+    private static boolean walkable = true;
+    
     /**
      * Constructor for objects of class SharkBlock
      * 
      * @param position
      */
-    public SharkBlock(int position)
+    public SharkBlock_S(int position)
     {
         super(position);
+        setImage(Block.PICTURES.get("SHARK_ICON"));   
+        game = getGame();
+        game.getTimer().addActionListener(this);
+        game.addShark(this);
+        randNum = new Random();
+        this.setDeathImage(Block.PICTURES.get("BLOODY_WATER_ICON")); 
+    }
+    
+    public SharkBlock_S()
+    {
+        super(-1);
         setImage(Block.PICTURES.get("SHARK_ICON"));   
         game = getGame();
         game.getTimer().addActionListener(this);
@@ -80,7 +97,7 @@ public class SharkBlock extends WaterBlock implements ActionListener
             //Remove all potential target blocks that are not waterblocks or the position of the player.
             {
                 Block block = game.getBlock(i);
-                if(!(block instanceof WaterBlock))
+                if(!(block instanceof WaterBlock_W))
                 {
                     it.remove();
                 }
@@ -112,7 +129,7 @@ public class SharkBlock extends WaterBlock implements ActionListener
 
             updateGuiBlock();
 
-            Block replacementBlock = new WaterBlock(oldPosition);
+            Block replacementBlock = new WaterBlock_W(oldPosition);
             game.setBlock(oldPosition, replacementBlock);
             replacementBlock.updateGuiBlock();
         }
@@ -165,4 +182,7 @@ public class SharkBlock extends WaterBlock implements ActionListener
         Sound.playSound("bite");
     }
 
+    public boolean getWalkable() {
+    	return walkable;
+    }
 }

@@ -1,4 +1,6 @@
+package blocks;
 import javax.swing.*;
+
 import java.util.Random;
 
 /**
@@ -14,7 +16,7 @@ public abstract class CreatureBlock extends Block
    
    public CreatureBlock(int position, ImageIcon image)
    {
-   super(true, true, position, image);
+   super(true, position, image);
    }
    
    /**
@@ -31,7 +33,7 @@ public abstract class CreatureBlock extends Block
      * direction of the motion which caused the action. 
      */
     public abstract void act(String direction);
-    
-    
+  
+    public abstract void close(int position);
     
 }

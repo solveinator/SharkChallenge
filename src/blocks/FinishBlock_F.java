@@ -1,3 +1,4 @@
+package blocks;
 import javax.swing.*;
 
 /**
@@ -7,16 +8,23 @@ import javax.swing.*;
  * @author Solveig Osborne 
  * @version CS162 Final 05/13/2015
  */
-public class FinishBlock extends ActionBlock
+public class FinishBlock_F extends ActionBlock
 {
+	private static boolean walkable = true;
+	
+	public FinishBlock_F()
+    {
+		super(false, -1, Block.PICTURES.get("FINISH_ICON"));
+    }
+	
     /**
      * Constructor for objects of class FinishBlock
      * 
      * @param int The integer position of the block.
      */
-    public FinishBlock(int position)
+    public FinishBlock_F(int position)
     {
-        super(true, false, position, Block.PICTURES.get("FINISH_ICON"));
+        super(false, position, Block.PICTURES.get("FINISH_ICON"));
     }
 
     /**
@@ -29,5 +37,13 @@ public class FinishBlock extends ActionBlock
     {
        getGame().setWon(true);
        getGame().getTimer().stop();
+    }
+    
+    public boolean getWalkable() {
+    	return walkable;
+    }
+    
+    public Block clone(int position) {
+    	return new FinishBlock_F(position);
     }
 }

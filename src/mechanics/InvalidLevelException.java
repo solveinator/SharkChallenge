@@ -1,3 +1,4 @@
+package mechanics;
 
 /**
  * An InvalidLevelException is thrown if the user attempts to navigate to a level which does not exist.

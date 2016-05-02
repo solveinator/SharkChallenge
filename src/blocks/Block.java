@@ -1,7 +1,10 @@
+package blocks;
 import java.io.File;
 import java.util.HashMap;
 
 import javax.swing.*;
+
+import mechanics.Game;
 
 
 /**
@@ -12,7 +15,6 @@ import javax.swing.*;
  */
 public abstract class Block
 {   
-    private boolean walkable;
     private boolean pushable;
     private ImageIcon icon;
     private ImageIcon deathImage;
@@ -22,21 +24,6 @@ public abstract class Block
     private static Game GAME;
     
     public static HashMap<String, ImageIcon> PICTURES = new HashMap<String, ImageIcon>();
-    
-//    public static ImageIcon SOLID_ICON = new ImageIcon(prefix + "images/solid.png");
-//    public static ImageIcon EMPTY_ICON = new ImageIcon(prefix + "images/blank.jpg");
-//    public static ImageIcon WATER_ICON = new ImageIcon(prefix + "images/water.png");
-//    public static ImageIcon GENERATOR_ICON = new ImageIcon(prefix + "images/generator.png");
-//    public static ImageIcon MOVEABLE_ICON = new ImageIcon(prefix + "images/moveable.png");
-//    public static ImageIcon LOCK_ICON = new ImageIcon(prefix + "images/lock.png");
-//    public static ImageIcon FINISH_ICON = new ImageIcon(prefix + "images/finish2.jpg");
-//    public static ImageIcon KEY_ICON = new ImageIcon(prefix + "images/key.png");
-//    public static ImageIcon MUD_ICON = new ImageIcon(prefix + "images/mud.png");
-//    public static ImageIcon GIRL_ICON = new ImageIcon(prefix + "images/person.jpg");
-//    public static ImageIcon DROWNING_ICON = new ImageIcon(prefix + "images/splash.png");
-//    public static ImageIcon BLOODY_WATER_ICON = new ImageIcon(prefix + "images/bloodyWater.png");
-//    public static ImageIcon DEATH_BY_SHARK_ICON = new ImageIcon(prefix + "images/deathByShark.png");
-//    public static ImageIcon SHARK_ICON = new ImageIcon(prefix + "images/shark.png");
     
     /**
      * Constructor for an abstract block. 
@@ -48,9 +35,8 @@ public abstract class Block
      * images fields stored in this class. 
      * 
      */
-    public Block(boolean canWalkOn, boolean canMove, int position, ImageIcon icon)
+    public Block(boolean canMove, int position, ImageIcon icon)
     {
-        this.walkable = canWalkOn;
         this.pushable = canMove;
         this.icon = icon;     
         this.position = position;
@@ -113,10 +99,14 @@ public abstract class Block
      * 
      * @return boolean Whether the block is walkable or not. 
      */
-    protected boolean getWalkable()
-    {
-        return walkable;
-    }
+    public abstract boolean getWalkable();
+    
+    /**
+     * Creates a non-shallow copy of a block, and gives it the specified position. 
+     * @param position
+     * @return The cloned block
+     */
+    public abstract Block clone(int position);    
     
     /**
      * Returns the integer position of the block, if it has one. If it does not currently have a position, the
@@ -124,7 +114,7 @@ public abstract class Block
      * 
      * @return int The position of the block. 
      */
-    protected int getPosition()
+    public int getPosition()
     {
         return position;
     }
@@ -134,7 +124,7 @@ public abstract class Block
      * 
      * @param int The position of the block. 
      */
-    protected void setPosition(int newPosition)
+    public void setPosition(int newPosition)
     {
         position = newPosition;
     }
@@ -144,11 +134,11 @@ public abstract class Block
      * 
      * @return boolean Whether the block will kill you. 
      */
-    protected boolean getDeadly(){
+    public boolean getDeadly(){
     	return !(deathImage == null); 
     }
     
-    protected void playDeathSound(){
+    public void playDeathSound(){
     }
     
     /**
@@ -252,4 +242,5 @@ public abstract class Block
     {
         GAME.getGui().updateBlock(position);
     }
-}
+    
+    }

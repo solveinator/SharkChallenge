@@ -1,4 +1,9 @@
+package blocks;
 import javax.swing.*;
+
+import mechanics.Game;
+import mechanics.Sound;
+
 import java.util.ArrayList;
 
 /**
@@ -9,17 +14,23 @@ import java.util.ArrayList;
  * @author Solveig Osborne 
  * @version 05/13/2015
  */
-public class PushableBlock extends MoveableBlock
+public class PushableBlock_B extends MoveableBlock
 {
+	private static boolean walkable = true;
     
     /**
      * Constructor for objects of class PushableBlock
      * 
      * @param int The integer position of the block. 
      */
-    public PushableBlock(int position)
+    public PushableBlock_B(int position)
     {
-        super(true, position, Block.PICTURES.get("MOVEABLE_ICON"));
+        super(position, Block.PICTURES.get("MOVEABLE_ICON"));
+    }
+    
+    public PushableBlock_B()
+    {
+        super(-1, Block.PICTURES.get("MOVEABLE_ICON"));
     }
 
     /**
@@ -37,9 +48,9 @@ public class PushableBlock extends MoveableBlock
         setPosition(newPosition);
         Game game = getGame();
         Block targetBlock = game.getBlock(newPosition);
-        if(targetBlock instanceof WaterBlock)
+        if(targetBlock instanceof WaterBlock_W)
         {
-            targetBlock = new MudBlock(newPosition);
+            targetBlock = new MudBlock_M(newPosition);
             game.setBlock(newPosition, targetBlock);
             game.changePermanentBoard(newPosition, "E");
             game.killShark(newPosition); //only happens if there was actually a shark there to begin with.
@@ -65,5 +76,13 @@ public class PushableBlock extends MoveableBlock
     public void act(String direction)
     {
     //This block does not act.
+    }
+    
+    public boolean getWalkable() {
+    	return walkable;
+    }
+    
+    public Block clone(int position) {
+    	return new PushableBlock_B (position);
     }
 }
